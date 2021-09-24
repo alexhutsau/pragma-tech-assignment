@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { web3Instance, contractInstance } from './app.contract'
 import { GetGroupResult } from './dto/get-group.dto'
 import { GetIndexResult } from './dto/get-index.dto'
