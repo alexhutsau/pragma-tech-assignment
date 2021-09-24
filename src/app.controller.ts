@@ -35,7 +35,7 @@ export class AppController {
 
     return this.appService.getGroup(groupId)
       .catch(err => {
-        throw ((err.message as string)!.endsWith('Invalid group id'))
+        throw ((err.message as string)?.endsWith('Invalid group id'))
           ? new NotFoundException()
           : err
       })
@@ -54,7 +54,7 @@ export class AppController {
 
     return await this.appService.getIndex(indexId)
       .catch(err => {
-        throw ((err.message as string)!.endsWith('Invalid index id'))
+        throw ((err.message as string)?.endsWith('Invalid index id'))
           ? new NotFoundException()
           : err
       })
