@@ -1,30 +1,30 @@
-import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger'
 import { BlockTransactionObject, Transaction } from 'web3-eth'
 
 class GetBlockTransactions implements Transaction {
   @ApiProperty()
-  blockHash: string;
+  blockHash: string
 
   @ApiProperty()
-  blockNumber: number;
+  blockNumber: number
 
   @ApiProperty()
-  from: string;
+  from: string
 
   @ApiProperty()
-  gas: number;
+  gas: number
 
   @ApiProperty()
-  gasPrice: string;
+  gasPrice: string
 
   @ApiProperty()
-  hash: string;
+  hash: string
 
   @ApiProperty()
-  input: string;
+  input: string
 
   @ApiProperty()
-  nonce: number;
+  nonce: number
 
   @ApiProperty({ required: false })
   r: string
@@ -36,7 +36,7 @@ class GetBlockTransactions implements Transaction {
   to: string
 
   @ApiProperty()
-  transactionIndex: number;
+  transactionIndex: number
 
   @ApiProperty({ required: false })
   type: number
@@ -45,7 +45,7 @@ class GetBlockTransactions implements Transaction {
   v: string
 
   @ApiProperty()
-  value: string;
+  value: string
 }
 
 @ApiExtraModels(GetBlockTransactions)
@@ -54,58 +54,58 @@ export class GetBlockResult implements BlockTransactionObject {
   baseFeePerGas: string
 
   @ApiProperty()
-  difficulty: number;
+  difficulty: number
 
   @ApiProperty()
-  extraData: string;
+  extraData: string
 
   @ApiProperty()
-  gasLimit: number;
+  gasLimit: number
 
   @ApiProperty()
-  gasUsed: number;
+  gasUsed: number
 
   @ApiProperty()
-  hash: string;
+  hash: string
 
   @ApiProperty()
-  logsBloom: string;
+  logsBloom: string
 
   @ApiProperty()
-  miner: string;
+  miner: string
 
   @ApiProperty({ required: false })
   mixHash: string
 
   @ApiProperty()
-  nonce: string;
+  nonce: string
 
   @ApiProperty()
-  number: number;
+  number: number
 
   @ApiProperty()
-  parentHash: string;
+  parentHash: string
 
   @ApiProperty({ deprecated: true })
-  receiptRoot: string;
+  receiptRoot: string
 
   @ApiProperty()
   receiptsRoot: string
 
   @ApiProperty()
-  sha3Uncles: string;
+  sha3Uncles: string
 
   @ApiProperty()
-  size: number;
+  size: number
 
   @ApiProperty()
-  stateRoot: string;
+  stateRoot: string
 
   @ApiProperty()
-  timestamp: number;
+  timestamp: number
 
   @ApiProperty()
-  totalDifficulty: number;
+  totalDifficulty: number
 
   @ApiProperty({ type: 'array', items: {
     oneOf: [
@@ -113,11 +113,11 @@ export class GetBlockResult implements BlockTransactionObject {
       { $ref: getSchemaPath(GetBlockTransactions) }
     ]
   }})
-  transactions: any;
+  transactions: any
 
   @ApiProperty()
-  transactionRoot: string;
+  transactionRoot: string
 
   @ApiProperty()
-  uncles: string[];
+  uncles: string[]
 }
