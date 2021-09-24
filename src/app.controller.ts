@@ -1,9 +1,11 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { ApiDoc } from './app.common/decorators/api-doc';
 import { AppService } from './app.service';
 import { GetGroupResult } from './dto/get-group.dto';
 import { GetIndexResult } from './dto/get-index.dto';
+import { isHexStrict } from 'web3-utils'
+import { GetBlockResult } from './dto/get-block.dto';
 
 @Controller()
 export class AppController {
@@ -56,5 +58,26 @@ export class AppController {
           ? new NotFoundException()
           : err
       })
+  }
+
+  @Get('blocks/:id')
+  @ApiDoc({
+    summary: 'Get block info',
+    result: GetBlockResult,
+    singleParam: { name: 'id', type: String, description: 'BlockNumber | BlockHash | "latest"' },
+    singleQuery: { name: 'boolean', type: Boolean, description: 'If `true` it returns the full transaction objects, if `false` only the hashes of the transactions', required: false },
+    excludeBadRequestError: true,
+  })
+  async getBlock(@Param('id') blockId: any, @Query('boolean') returnTransactionObjects: boolean) {
+    if (isHexStrict(blockId)) {
+      if ((blockId as string).length !== 66) throw new NotFoundException()
+    }
+    else if (blockId !== 'latest' && (!Number.isInteger(blockId = +blockId) || blockId < 0))
+      throw new NotFoundException()
+
+    const block = await this.appService.getBlock(blockId, returnTransactionObjects)
+    if (!block) throw new NotFoundException()
+
+    return block
   }
 }

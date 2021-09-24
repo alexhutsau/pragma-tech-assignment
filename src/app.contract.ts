@@ -94,10 +94,15 @@ const jsonInterface: AbiItem[] = [
   }
 ]
 
-let contract: Contract
-export = function appContract(): Contract {
-  return contract || (contract = new
-    new Web3(process.env.WEB3_PROVIDER)
-      .eth.Contract(jsonInterface, process.env.CONTRACT_ADDRESS)
+let _web3: Web3
+let _contract: Contract
+
+export function web3Instance(): Web3 {
+  return _web3 || (_web3 = new Web3(process.env.WEB3_PROVIDER))
+}
+
+export function contractInstance(): Contract {
+  return _contract || (_contract = new
+    (web3Instance()).eth.Contract(jsonInterface, process.env.CONTRACT_ADDRESS)
   )
 }
